@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Cyber Security 5 Tahun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #00f5ff, #00d4ff, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #b0c4de;
+        }
+
+        .roadmap {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            position: relative;
+        }
+
+        /* Timeline Line */
+        .roadmap::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #00f5ff, #0099ff, #6a5acd, #ff6b6b, #ffd93d);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        .year-card {
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .year-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .year-content {
+            flex: 1;
+            margin: 0 40px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .year-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .year-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: var(--accent-color);
+        }
+
+        /* Year Colors */
+        .year-1 { --accent-color: #00f5ff; }
+        .year-2 { --accent-color: #0099ff; }
+        .year-3 { --accent-color: #6a5acd; }
+        .year-4 { --accent-color: #ff6b6b; }
+        .year-5 { --accent-color: #ffd93d; }
+
+        .year-number {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 80px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #000;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+            z-index: 10;
+        }
+
+        .year-title {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .year-subtitle {
+            font-size: 1.1rem;
+            color: #b0c4de;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .skill-category {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 3px solid var(--accent-color);
+        }
+
+        .skill-category h4 {
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+            font-size: 0.9rem;
+            color: #d0d0d0;
+        }
+
+        .skill-category li {
+            margin-bottom: 3px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .skill-category li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .cert-badge {
+            background: linear-gradient(45deg, var(--accent-color), rgba(255, 255, 255, 0.1));
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .milestones {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .milestones h4 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .milestone-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .milestone-item::before {
+            content: '✓';
+            color: var(--accent-color);
+            margin-right: 8px;
+            font-weight: bold;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .roadmap::before {
+                left: 20px;
+            }
+
+            .year-card {
+                flex-direction: column !important;
+            }
+
+            .year-content {
+                margin: 0 0 0 60px;
+            }
+
+            .year-number {
+                left: 20px;
+                transform: none;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .year-content {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .year-card:nth-child(1) .year-content { animation-delay: 0.1s; }
+        .year-card:nth-child(2) .year-content { animation-delay: 0.2s; }
+        .year-card:nth-child(3) .year-content { animation-delay: 0.3s; }
+        .year-card:nth-child(4) .year-content { animation-delay: 0.4s; }
+        .year-card:nth-child(5) .year-content { animation-delay: 0.5s; }
+
+        /* Budget Summary */
+        .budget-summary {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .budget-summary h3 {
+            color: #ffd93d;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .budget-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .budget-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border-top: 3px solid #ffd93d;
+        }
+
+        .budget-amount {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #ffd93d;
+        }
+
+        .budget-label {
+            font-size: 0.9rem;
+            color: #b0c4de;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🛡️ Roadmap Cyber Security 5 Tahun</h1>
+            <p>Perjalanan dari Pelajar menuju Expert Cyber Security Professional</p>
+        </div>
+
+        <div class="roadmap">
+            <!-- Year 1 -->
+            <div class="year-card">
+                <div class="year-number">1</div>
+                <div class="year-content year-1">
+                    <h3 class="year-title">Fondasi Dasar & Security Fundamentals</h3>
+                    <p class="year-subtitle">Membangun fondasi solid networking, sistem operasi, dan konsep dasar keamanan</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Networking & Sistem</h4>
+                            <ul>
+                                <li>OSI Model & TCP/IP</li>
+                                <li>Subnetting & CIDR</li>
+                                <li>Linux Command Line</li>
+                                <li>Virtualization</li>
+                                <li>Python & Bash</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Security Basics</h4>
+                            <ul>
+                                <li>CIA Triad</li>
+                                <li>Risk Assessment</li>
+                                <li>Cryptography Basics</li>
+                                <li>Nmap & Wireshark</li>
+                                <li>Vulnerability Scanning</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certifications">
+                        <span class="cert-badge">CompTIA Network+</span>
+                        <span class="cert-badge">CompTIA Security+</span>
+                    </div>
+
+                    <div class="milestones">
+                        <h4>Target Pencapaian:</h4>
+                        <div class="milestone-item">Setup home lab dengan 3-4 VM</div>
+                        <div class="milestone-item">2+ foundational certifications</div>
+                        <div class="milestone-item">Join 2+ security communities</div>
+                        <div class="milestone-item">Complete 10+ hands-on projects</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year 2 -->
+            <div class="year-card">
+                <div class="year-number">2</div>
+                <div class="year-content year-2">
+                    <h3 class="year-title">Pendalaman Security & Web Application Testing</h3>
+                    <p class="year-subtitle">Menguasai security tools dan teknik testing aplikasi web</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Web App Security</h4>
+                            <ul>
+                                <li>OWASP Top 10</li>
+                                <li>SQL Injection & XSS</li>
+                                <li>Burp Suite Pro</li>
+                                <li>API Security</li>
+                                <li>Session Management</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Penetration Testing</h4>
+                            <ul>
+                                <li>Reconnaissance</li>
+                                <li>Metasploit Framework</li>
+                                <li>Post-exploitation</li>
+                                <li>Report Writing</li>
+                                <li>Social Engineering</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Malware Analysis</h4>
+                            <ul>
+                                <li>Static Analysis</li>
+                                <li>Dynamic Analysis</li>
+                                <li>Reverse Engineering</li>
+                                <li>IoC Identification</li>
+                                <li>Sandbox Analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certifications">
+                        <span class="cert-badge">CEH</span>
+                        <span class="cert-badge">OSCP Prep</span>
+                        <span class="cert-badge">GCIH</span>
+                    </div>
+
+                    <div class="milestones">
+                        <h4>Target Pencapaian:</h4>
+                        <div class="milestone-item">Advanced security certifications</div>
+                        <div class="milestone-item">CTF competition achievements</div>
+                        <div class="milestone-item">Bug bounty participation</div>
+                        <div class="milestone-item">Security blog/content creation</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year 3 -->
+            <div class="year-card">
+                <div class="year-number">3</div>
+                <div class="year-content year-3">
+                    <h3 class="year-title">Spesialisasi dan Expertise Development</h3>
+                    <p class="year-subtitle">Menentukan dan mendalami area spesialisasi</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Advanced PenTest</h4>
+                            <ul>
+                                <li>Red Team Operations</li>
+                                <li>Active Directory</li>
+                                <li>Mobile Security</li>
+                                <li>C2 Frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Digital Forensics</h4>
+                            <ul>
+                                <li>Computer Forensics</li>
+                                <li>Memory Forensics</li>
+                                <li>SIEM & Threat Hunting</li>
+                                <li>Incident Response</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Cloud Security</h4>
+                            <ul>
+                                <li>AWS/Azure Security</li>
+                                <li>Container Security</li>
+                                <li>DevSecOps</li>
+                                <li>Cloud Compliance</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>App Security</h4>
+                            <ul>
+                                <li>Secure Coding</li>
+                                <li>Code Review</li>
+                                <li>SAST/DAST Tools</li>
+                                <li>API Security</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certifications">
+                        <span class="cert-badge">OSCP</span>
+                        <span class="cert-badge">GCFA</span>
+                        <span class="cert-badge">AWS Security</span>
+                        <span class="cert-badge">CSSLP</span>
+                    </div>
+
+                    <div class="milestones">
+                        <h4>Target Pencapaian:</h4>
+                        <div class="milestone-item">Specialization area mastery</div>
+                        <div class="milestone-item">Conference presentation</div>
+                        <div class="milestone-item">Open source contributions</div>
+                        <div class="milestone-item">Professional recognition</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year 4 -->
+            <div class="year-card">
+                <div class="year-number">4</div>
+                <div class="year-content year-4">
+                    <h3 class="year-title">Leadership dan Strategic Thinking</h3>
+                    <p class="year-subtitle">Mengembangkan leadership skills dan business acumen</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Technical Leadership</h4>
+                            <ul>
+                                <li>Security Architecture</li>
+                                <li>Zero-trust Design</li>
+                                <li>Team Management</li>
+                                <li>Technology Evaluation</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Business & GRC</h4>
+                            <ul>
+                                <li>ISO 27001, NIST CSF</li>
+                                <li>Risk Management</li>
+                                <li>Compliance Audits</li>
+                                <li>Security Metrics</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Strategic Communication</h4>
+                            <ul>
+                                <li>Executive Reporting</li>
+                                <li>Board Presentations</li>
+                                <li>Risk Communication</li>
+                                <li>Security Awareness</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certifications">
+                        <span class="cert-badge">CISSP</span>
+                        <span class="cert-badge">CISM</span>
+                        <span class="cert-badge">CRISC</span>
+                    </div>
+
+                    <div class="milestones">
+                        <h4>Target Pencapaian:</h4>
+                        <div class="milestone-item">Leadership certifications</div>
+                        <div class="milestone-item">Team leadership experience</div>
+                        <div class="milestone-item">Industry working group participation</div>
+                        <div class="milestone-item">Mentorship program involvement</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Year 5 -->
+            <div class="year-card">
+                <div class="year-number">5</div>
+                <div class="year-content year-5">
+                    <h3 class="year-title">Strategic Expertise dan Innovation</h3>
+                    <p class="year-subtitle">Menjadi subject matter expert dan industry thought leader</p>
+                    
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Strategic Capabilities</h4>
+                            <ul>
+                                <li>Enterprise Strategy</li>
+                                <li>Digital Transformation</li>
+                                <li>Innovation Leadership</li>
+                                <li>Technology Roadmaps</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Executive Readiness</h4>
+                            <ul>
+                                <li>C-Suite Preparation</li>
+                                <li>Business Alignment</li>
+                                <li>Crisis Leadership</li>
+                                <li>Industry Influence</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h4>Career Targets</h4>
+                            <ul>
+                                <li>CISO Track</li>
+                                <li>Security Architect</li>
+                                <li>Research Director</li>
+                                <li>Startup Founder</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="certifications">
+                        <span class="cert-badge">CISSP-ISSAP</span>
+                        <span class="cert-badge">SABSA</span>
+                        <span class="cert-badge">ISA/IEC 62443</span>
+                    </div>
+
+                    <div class="milestones">
+                        <h4>Target Pencapaian:</h4>
+                        <div class="milestone-item">Strategic thinking demonstration</div>
+                        <div class="milestone-item">Industry thought leadership</div>
+                        <div class="milestone-item">C-suite communication capability</div>
+                        <div class="milestone-item">Executive advisory roles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>
